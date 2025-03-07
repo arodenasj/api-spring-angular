@@ -1,9 +1,13 @@
 <div class="">
-
   <h2>Lista de curriculums</h2>
-  <ul>
-    <li *ngFor="let resume of resumes; let i = index" class="">
-      {{ resume.name }} - {{ resume.email }}
-    </li>
-  </ul>
+  <div *ngIf="resumes.length === 0">No hay curriculums disponibles.</div>
+  <div *ngIf="resumes.length > 0">
+    <p>Total resumes: {{resumes.length}}</p>
+    <ul>
+      <li *ngFor="let resume of resumes; let i = index" class="">
+        {{i + 1}}. {{ resume?.name }} - {{ resume?.email }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="resumes === undefined">Loading...</div>
 </div>
