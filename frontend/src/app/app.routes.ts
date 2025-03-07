@@ -1,6 +1,3 @@
-import { Routes } from '@angular/router';
-import { ResumeListComponent } from './components/resume-list/resume-list.component';
+import {Routes} from '@angular/router';
 
-export const routes: Routes = [
-  { path: '', component: ResumeListComponent }
-];
+export const routes: Routes = [];

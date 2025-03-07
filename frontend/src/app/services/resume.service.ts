@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Resume } from '../models/resume';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Resume} from '../models/resume';
 
 const baseUrl = 'http://localhost:8080/api/resumes';
 
@@ -10,7 +10,8 @@ const baseUrl = 'http://localhost:8080/api/resumes';
 })
 export class ResumeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   showAllResumes(): Observable<Resume[]> {
     return this.http.get<Resume[]>(baseUrl);

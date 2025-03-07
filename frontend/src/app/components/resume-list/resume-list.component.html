@@ -1,9 +1,9 @@
 <div class="">
 
   <h2>Lista de curriculums</h2>
-<ul>
-  <li class="" *ngFor="let resume of resumes; let i = index">
-    {{resume.name}} - {{resume.email}}
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let resume of resumes; let i = index" class="">
+      {{ resume.name }} - {{ resume.email }}
+    </li>
+  </ul>
 </div>
