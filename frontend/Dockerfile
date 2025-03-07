@@ -6,7 +6,7 @@ COPY . .
 RUN npm run build --prod
 
 FROM nginx:1.23.1
-COPY --from=build-step /app/dist/frontend/* /usr/share/nginx/html/
+COPY --from=build-step /app/dist/frontend /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html

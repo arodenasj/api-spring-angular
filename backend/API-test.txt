@@ -1,0 +1,32 @@
+# Get all resumes
+GET http://localhost:8080/api/resumes
+
+# Get one resume
+GET http://localhost:8080/api/resumes/1
+
+# Create new resume
+POST http://localhost:8080/api/resumes
+Content-Type: application/json
+
+{
+    "name": "Test User",
+    "email": "test@example.com",
+    "phone": "1234567890",
+    "address": "Test Address",
+    "position": "Test Position"
+}
+
+# Update resume
+PUT http://localhost:8080/api/resumes/1
+Content-Type: application/json
+
+{
+    "name": "Updated User",
+    "email": "updated@example.com",
+    "phone": "0987654321",
+    "address": "Updated Address",
+    "position": "Updated Position"
+}
+
+# Delete resume
+DELETE http://localhost:8080/api/resumes/1

@@ -4,7 +4,6 @@
 # - docker-compose down         # Stop and remove containers
 # - docker system prune -af --volumes  # Remove all images and volumes
 # - docker-compose up --build   # Rebuild and start
-
 version: '3.8'
 
 services:

@@ -1,0 +1,14 @@
+
+  ,---.            ,--.                 ,--.       ,------.           ,--.
+ /  O  \ ,--,--, ,-'  '-. ,---. ,--,--, `--' ,---. |  .--. ' ,---.  ,-|  |,---. ,--,--,  ,--,--. ,---.
+|  .-.  ||      \'-.  .-'| .-. ||      \,--.| .-. ||  '--'.'| .-. |' .-. | .-. :|      \' ,-.  |(  .-'
+|  | |  ||  ||  |  |  |  ' '-' '|  ||  ||  |' '-' '|  |\  \ ' '-' '\ `-' \   --.|  ||  |\ '-'  |.-'  `)
+`--' `--'`--''--'  `--'   `---' `--''--'`--' `---' `--' '--' `---'  `---' `----'`--''--' `--`--'`----'
+
+${application.title}Backend for resume app ${application.version}0.1.0
+Powered by Spring Boot ${spring-boot.version}
+
+Spring Boot REST API for Resume Management
+Features: CRUD operations for resumes, H2 database, Swagger UI documentation
+Author: Antonio Ródenas <anrodenasj@gmail.com>
+
