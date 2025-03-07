@@ -1,13 +1,26 @@
-<div class="">
-  <h2>Lista de curriculums</h2>
-  <div *ngIf="resumes.length === 0">No hay curriculums disponibles.</div>
-  <div *ngIf="resumes.length > 0">
-    <p>Total resumes: {{resumes.length}}</p>
-    <ul>
-      <li *ngFor="let resume of resumes; let i = index" class="">
-        {{i + 1}}. {{ resume?.name }} - {{ resume?.email }}
-      </li>
-    </ul>
-  </div>
-  <div *ngIf="resumes === undefined">Loading...</div>
-</div>
+<mat-card class="m-3">
+        <mat-card-header>
+          <mat-card-title>Lista de curriculums</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div *ngIf="resumes.length === 0" class="p-3">
+            <span class="text-medium">No hay curriculums disponibles.</span>
+          </div>
+
+          <div *ngIf="resumes.length > 0">
+            <p class="text-primary">Total resumes: {{resumes.length}}</p>
+
+            <mat-list>
+              <mat-list-item *ngFor="let resume of resumes; let i = index">
+                <div matListItemTitle>{{i + 1}}. {{ resume?.name }}</div>
+                <div matListItemLine>{{ resume?.email }}</div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+          <div *ngIf="resumes === undefined" class="d-flex justify-content-center">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        </mat-card-content>
+      </mat-card>
