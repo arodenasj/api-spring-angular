@@ -1,31 +1,37 @@
 services:
-          h2:
-            image: oscarfonts/h2
-            container_name: h2
-            environment:
-              - H2_OPTIONS=-ifNotExists
-              - H2_TCP_PORT=9092
-              - H2_WEB_PORT=8082
-              - H2_BASE_DIR=/opt/h2-data
-            ports:
-              - 9092:8082
+                # Database Service
+                postgres:
+                  image: postgres:14.5
+                  container_name: postgres
+                  environment:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: admin
+                    POSTGRES_DB: spring_db
+                  ports:
+                    - "5432:5432"
 
-          backend:
-            image: antoniorodenas/backend:latest
-            container_name: backend
-            build:
-              context: ./backend
-            ports:
-              - 8080:8080
-            depends_on:
-              - h2
+                # Spring Boot Backend Service
+                backend:
+                  image: /backend:latest
+                  container_name: backend
+                  build:
+                    context: ./backend
+                  ports:
+                    - "8080:8080"
+                  depends_on:
+                    - postgres
+                  environment:
+                    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/spring_db
+                    SPRING_DATASOURCE_USERNAME: postgres
+                    SPRING_DATASOURCE_PASSWORD: admin
 
-          frontend:
-            image: antoniorodenas/frontend:latest
-            container_name: frontend
-            build:
-              context: ./frontend
-            ports:
-              - 80:80
-            depends_on:
-              - backend
+                # Angular Frontend Service
+                frontend:
+                  image: /frontend:latest
+                  container_name: frontend
+                  build:
+                    context: ./frontend
+                  ports:
+                    - "80:80"
+                  depends_on:
+                    - backend

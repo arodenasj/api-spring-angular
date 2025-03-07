@@ -7,7 +7,7 @@ package es.insinno.controller;
 
     @RestController
     @RequestMapping("/api/resumes")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin("*")
     public class ResumeController {
 
         @GetMapping

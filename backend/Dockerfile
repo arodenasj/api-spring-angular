@@ -8,7 +8,7 @@ LABEL authors="AntonioRodenasJurado"
 WORKDIR /app
 
 # Copiar el archivo JAR de la aplicación al contenedor
-COPY target/cv-spring-angular.jar /app/app.jar
+COPY target/api-spring-angular.jar /app/app.jar
 
 # Exponer el puerto en el que la aplicación se ejecutará
 EXPOSE 8080
