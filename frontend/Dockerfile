@@ -3,8 +3,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build
-RUN ls -la dist/frontend
+RUN npm run build --prod
 
 FROM nginx:1.23.1
 COPY --from=build-step /app/dist/frontend/* /usr/share/nginx/html/
