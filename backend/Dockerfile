@@ -15,6 +15,6 @@ EXPOSE 8080
 
 # Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
-# docker build -t cv-sprin-angular-backend .
+# docker build -t api-spring-angular-backend .
 # docker images list
 
