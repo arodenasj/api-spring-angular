@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org"
+              xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        <head>
+            <title>Welcome Page</title>
+            <link rel="stylesheet" th:href="@{/css/index.css}">
+        </head>
+        <body>
+            <div class="container">
+                <h1>Welcome to the API Management System</h1>
+
+                <div class="user-info">
+                    <h3>User Information</h3>
+                    <p>Username: <strong sec:authentication="name"></strong></p>
+                    <p>Roles: <strong sec:authentication="principal.authorities"></strong></p>
+                </div>
+
+                <div class="links">
+                    <a href="/swagger-ui/index.html" class="btn btn-primary" target="_blank">API Documentation (Swagger)</a>
+                    <a href="/h2-console" class="btn btn-secondary" target="_blank">Database Console (H2)</a>
+                </div>
+
+                <form class="logout-form" th:action="@{/api/auth/logout}" method="post">
+                    <button class="btn-logout" type="submit">Logout</button>
+                </form>
+            </div>
+            <script th:src="@{/js/index.js}"></script>
+        </body>
+        </html>

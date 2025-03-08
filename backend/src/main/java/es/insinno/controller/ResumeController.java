@@ -19,7 +19,6 @@ package es.insinno.controller;
 
     @RestController
     @RequestMapping("/api/resumes")
-    @CrossOrigin("*")
     @Tag(name = "Resume Management", description = "Operations related to resume management")
     public class ResumeController {
 

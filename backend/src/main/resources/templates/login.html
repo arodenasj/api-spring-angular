@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-header">
+        <h2>Welcome Back</h2>
+    </div>
+
+    <div class="alert show" th:if="${param.error}">
+        Invalid username or password.
+    </div>
+
+    <form method="post" th:action="@{/api/auth/login}" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" placeholder="Enter your username" required
+                   type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" placeholder="Enter your password" required
+                   type="password" oninput="checkPasswordStrength()">
+            <div id="password-strength-text" class="password-strength">Weak</div>
+        </div>
+
+        <button class="btn-login" type="submit">Sign In</button>
+    </form>
+</div>
+<script th:src="@{/js/login.js}"></script>
+</body>
+</html>
