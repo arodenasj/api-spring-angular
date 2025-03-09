@@ -1,18 +1,21 @@
-FROM node:18.19.0 AS build-step
-WORKDIR /app
-COPY package*.json ./
+FROM node:22.14 AS build-step
+RUN mkdir -p /usr/local/app
+WORKDIR /usr/local/app
+COPY ./ /usr/local/app
 RUN npm install
-COPY . .
-RUN npm run build
+RUN npm run build --prod
 
-FROM nginx:1.23.1
-COPY --from=build-step /app/dist/frontend/browser/* /usr/share/nginx/html/
+FROM nginx:1.25.2
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-RUN chmod -R 755 /usr/share/nginx/html && \
-    chown -R nginx:nginx /usr/share/nginx/html
+COPY --from=build-step /usr/local/app/dist/frontend/browser /usr/share/nginx/html
+RUN chmod -R 755 /usr/share/nginx/html
 EXPOSE 80
 
 LABEL authors="AntonioRodenasJurado"
 
-# docker build -t api-spring-angular-frontend .
-# docker images list
+# docker build -t frontend:1.0 .
+# docker image list
+# docker tag frontend:1.0 anrodenasj/frontend:1.0
+# docker login
+# hub.docker.com
+# docker push anrodenasj/frontend:1.0
