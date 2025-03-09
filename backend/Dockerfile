@@ -4,17 +4,13 @@ FROM eclipse-temurin:21-jdk
 # Establecer el autor de la imagen
 LABEL authors="AntonioRodenasJurado"
 
-# Establecer el directorio de trabajo
-WORKDIR /app
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 
-# Copiar el archivo JAR de la aplicación al contenedor
-COPY target/api-spring-angular.jar /app/app.jar
-
-# Exponer el puerto en el que la aplicación se ejecutará
-EXPOSE 8080
-
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
-# docker build -t api-spring-angular-backend .
-# docker images list
-
+# docker build -t backend:1.0 .
+# docker image list
+# docker tag backend:1.0 anrodenasj/backend:1.0
+# docker login
+# hub.docker.com
+# docker push anrodenasj/backend:1.0
