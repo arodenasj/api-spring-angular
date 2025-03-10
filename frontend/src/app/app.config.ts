@@ -8,7 +8,7 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withFetch()), // Add withFetch()
+    provideHttpClient(withFetch()),
     provideRouter(routes),
     provideClientHydration(withEventReplay())
   ]
