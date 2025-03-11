@@ -1,0 +1,44 @@
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+button.primary {
+  padding: 12px 24px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.primary:hover {
+  background-color: #2980b9;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}

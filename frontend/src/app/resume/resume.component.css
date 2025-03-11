@@ -1,0 +1,47 @@
+.resumes {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.name {
+  font-size: 24px;
+  color: #2c3e50;
+  margin: 0 0 16px 0;
+  font-weight: 600;
+}
+
+.email {
+  color: #3498db;
+  font-size: 16px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phone {
+  color: #7f8c8d;
+  font-size: 16px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.address {
+  color: #7f8c8d;
+  font-size: 16px;
+  margin: 8px 0;
+  font-style: italic;
+}
+
+.position {
+  color: #2ecc71;
+  font-size: 18px;
+  margin: 12px 0 0 0;
+  font-weight: 500;
+  border-top: 1px solid #ecf0f1;
+  padding-top: 12px;
+}

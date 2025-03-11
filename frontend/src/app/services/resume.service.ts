@@ -1,39 +1,26 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Resume} from '../models/resume';
-
-const baseUrl = 'http://localhost:8080/api/resumes';
+import { Injectable } from '@angular/core';
+import {Resume} from "../resume";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResumeService {
-
-  constructor(private http: HttpClient) {
+  protected resumeList: Resume[] = [
+      {
+    "id": 1,
+    "name": "Antonio Ródenas",
+    "email": "anrodenasj@gmail.com",
+    "phone": "1234567890",
+    "address": "Calle Falsa 1",
+    "position": "Developer"
+  }
+    ]
+  constructor() { }
+  getAllResumes(): Resume[] {
+    return this.resumeList;
   }
 
-  showAllResumes(): Observable<Resume[]> {
-    return this.http.get<Resume[]>(baseUrl);
-  }
-
-  findResumeById(id: number): Observable<Resume> {
-    return this.http.get<Resume>(`${baseUrl}/${id}`);
-  }
-
-  createResume(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
-  }
-
-  updateResume(id: number, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
-  }
-
-  deleteResume(id: number): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
-  }
-
-  deleteAllResumes(): Observable<any> {
-    return this.http.delete(baseUrl);
+  getResumeById(id: number): Resume | undefined {
+    return this.resumeList.find(resume => resume.id === id);
   }
 }

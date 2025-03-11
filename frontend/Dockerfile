@@ -5,10 +5,10 @@ COPY ./ /usr/local/app
 RUN npm install
 RUN npm run build --prod
 
-FROM nginx:1.25.2
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build-step /usr/local/app/dist/frontend/browser /usr/share/nginx/html
-RUN chmod -R 755 /usr/share/nginx/html
+FROM nginx:1.23.1
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build-step /usr/local/app/dist/frontend /usr/share/nginx/html
+
 EXPOSE 80
 
 LABEL authors="AntonioRodenasJurado"
