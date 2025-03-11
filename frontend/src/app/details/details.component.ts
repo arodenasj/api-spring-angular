@@ -33,8 +33,9 @@ import { Component, inject } from "@angular/core";
 
      constructor() {
        const resumeId = Number(this.route.snapshot.params["id"]);
-       this.resumeService.getResumeById(resumeId).then((resume: Resume | undefined) => {
-         this.resume = resume;
-       });
-     }
-   }
+this.resumeService.getResumeById(resumeId).then(resume => {
+          this.resume = resume;
+        }
+        );
+      }
+    }

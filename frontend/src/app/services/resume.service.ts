@@ -12,10 +12,11 @@ export class ResumeService {
 
     async getAllResumes(): Promise<Resume[]> {
         const data = await fetch(this.url);
-        return data.json() ?? [];
+        return await data.json() ?? [];
     }
 
     async getResumeById(id: number): Promise<Resume | undefined> {
-const data = await fetch(`${this.url}/${id}`);
-    return data.json() ?? {};}
+        const data = await fetch(`${this.url}/${id}`);
+        return data.json() ?? {};
+    }
 }
