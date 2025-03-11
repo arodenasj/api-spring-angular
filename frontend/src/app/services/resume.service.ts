@@ -1,26 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Resume} from "../resume";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ResumeService {
-  protected resumeList: Resume[] = [
-      {
-    "id": 1,
-    "name": "Antonio Ródenas",
-    "email": "anrodenasj@gmail.com",
-    "phone": "1234567890",
-    "address": "Calle Falsa 1",
-    "position": "Developer"
-  }
-    ]
-  constructor() { }
-  getAllResumes(): Resume[] {
-    return this.resumeList;
-  }
+    url = 'http://localhost:3000/resumes';
 
-  getResumeById(id: number): Resume | undefined {
-    return this.resumeList.find(resume => resume.id === id);
-  }
+    constructor() {
+    }
+
+    async getAllResumes(): Promise<Resume[]> {
+        const data = await fetch(this.url);
+        return data.json() ?? [];
+    }
+
+    async getResumeById(id: number): Promise<Resume | undefined> {
+const data = await fetch(`${this.url}/${id}`);
+    return data.json() ?? {};}
 }
