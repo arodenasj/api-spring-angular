@@ -16,7 +16,7 @@ import { Component, inject } from "@angular/core";
           <p>{{resume?.address}}</p>
         </section>
         <section class="resume-details">
-          <h2 class="desciption">Summary</h2>
+          <h2 class="description">Summary</h2>
           <ul>
             <li>Positions: {{resume?.position}}</li>
           </ul>
