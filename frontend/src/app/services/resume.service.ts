@@ -5,7 +5,7 @@ import {Resume} from "../resume";
     providedIn: 'root'
 })
 export class ResumeService {
-    url = 'http://localhost:3000/resumes';
+    url = 'http://localhost:8080/api/resumes';
 
     constructor() {
     }
