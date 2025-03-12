@@ -11,7 +11,7 @@ services:
       - "1521:1521"
 
   backend:
-    image: anrodenasj/backend:1.0
+    image: antoniorodenas/backend:2.0
     container_name: spring-backend
     ports:
       - "8080:8080"
@@ -19,7 +19,7 @@ services:
       - h2
 
   frontend:
-      image: anrodenasj/frontend:1.0
+      image: antoniorodenas/frontend:2.0
       container_name: angular-frontend
       ports:
         - "80:80"

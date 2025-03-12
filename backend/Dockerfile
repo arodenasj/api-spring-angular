@@ -8,9 +8,9 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 
-# docker build -t backend:1.0 .
+# docker build -t backend:2.0 .
 # docker image list
-# docker tag backend:1.0 anrodenasj/backend:1.0
+# docker tag backend:2.0 antoniorodenas/backend:2.0
 # docker login
 # hub.docker.com
-# docker push anrodenasj/backend:1.0
+# docker push antoniorodenas/backend:2.0

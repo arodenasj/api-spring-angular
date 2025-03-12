@@ -7,8 +7,7 @@ import {Component} from '@angular/core';
       standalone: true,
       imports: [
         RouterLink,
-        RouterOutlet,
-        HomeComponent
+        RouterOutlet
       ],
       template: `
         <main>
