@@ -4,6 +4,7 @@ import { Resume } from "../resume";
 import { NgForOf, NgIf } from "@angular/common";
 import { ResumeService } from "../services/resume.service";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: "app-home",
@@ -12,13 +13,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ResumeComponent,
     NgForOf,
     MatProgressBarModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   template: `
     <section>
       <form>
         <input type="text" placeholder="Filter by name..." #filter/>
         <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+        <button class="primary" type="button" [routerLink]="['/manage']">Manage Resumes</button>
       </form>
     </section>
     <section class="results">
