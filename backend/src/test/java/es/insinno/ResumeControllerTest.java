@@ -80,24 +80,52 @@ class ResumeControllerTest {
 
     @Test
     void testUpdateResume() throws Exception {
+        when(resumeService.getResumeById(1L)).thenReturn(Optional.of(resume1));
         when(resumeService.saveResume(any(Resume.class))).thenReturn(resume1);
 
         mockMvc.perform(put("/api/resumes/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"phone\": \"1234567890\", \"address\": \"123 Main St\", \"position\": \"Developer\"}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"phone\": \"1234567890\", \"address\": \"123 Main St\", \"position\": \"Developer\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John Doe"));
 
+        verify(resumeService, times(1)).getResumeById(1L);
         verify(resumeService, times(1)).saveResume(any(Resume.class));
     }
 
     @Test
+    void testUpdateResumeNotFound() throws Exception {
+        when(resumeService.getResumeById(1L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/api/resumes/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"phone\": \"1234567890\", \"address\": \"123 Main St\", \"position\": \"Developer\"}"))
+                .andExpect(status().isNotFound());
+
+        verify(resumeService, times(1)).getResumeById(1L);
+        verify(resumeService, never()).saveResume(any(Resume.class));
+    }
+
+    @Test
     void testDeleteResume() throws Exception {
+        when(resumeService.getResumeById(1L)).thenReturn(Optional.of(resume1));
         doNothing().when(resumeService).deleteResume(1L);
 
         mockMvc.perform(delete("/api/resumes/1"))
                 .andExpect(status().isOk());
 
+        verify(resumeService, times(1)).getResumeById(1L);
         verify(resumeService, times(1)).deleteResume(1L);
+    }
+
+    @Test
+    void testDeleteResumeNotFound() throws Exception {
+        when(resumeService.getResumeById(1L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(delete("/api/resumes/1"))
+                .andExpect(status().isNotFound());
+
+        verify(resumeService, times(1)).getResumeById(1L);
+        verify(resumeService, never()).deleteResume(anyLong());
     }
 }
