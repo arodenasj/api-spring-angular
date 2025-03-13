@@ -5,4 +5,5 @@ export interface Resume {
   phone: string;
   address: string;
   position: string;
+  imageUrl: string;
 }

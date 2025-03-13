@@ -2,13 +2,20 @@ import { Component, inject } from "@angular/core";
    import { ActivatedRoute } from "@angular/router";
    import { ResumeService } from "../services/resume.service";
    import { Resume } from "../resume";
+import {NgIf} from '@angular/common';
 
    @Component({
      selector: "app-details",
      standalone: true,
-     imports: [],
+     imports: [
+       NgIf
+     ],
      template: `
       <article>
+        <div class="image-avatar">
+          <img *ngIf="resume?.imageUrl" [src]="resume?.imageUrl" [alt]="resume?.name || ''">
+          <span *ngIf="!resume?.imageUrl">{{getFirstCharacter()}}</span>
+        </div>
         <h2>{{resume?.name}}</h2>
         <section class="resume-description">
           <p>{{resume?.email}}</p>
@@ -29,6 +36,10 @@ import { Component, inject } from "@angular/core";
      route: ActivatedRoute = inject(ActivatedRoute);
      resumeService = inject(ResumeService);
      resume: Resume | undefined;
+
+     getFirstCharacter(): string {
+        return this.resume?.name?.charAt(0) || "";
+     }
 
      constructor() {
        const resumeId = Number(this.route.snapshot.params["id"]);
