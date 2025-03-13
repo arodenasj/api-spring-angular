@@ -16,7 +16,7 @@ import { Injectable } from '@angular/core';
 
       async getResumeById(id: number): Promise<Resume | undefined> {
         const data = await fetch(`${this.url}/${id}`);
-        return data.json() ?? {};
+        return await data.json() ?? {};
       }
 
       async createResume(resume: Resume): Promise<Resume> {

@@ -2,8 +2,12 @@ package es.insinno.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Schema(description = "Resume entity representing a person's professional information")
@@ -35,60 +39,72 @@ public class Resume {
     public Resume() {
     }
 
-    public Resume(Long id, String name, String email, String phone, String address, String position) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.position = position;
+    @Schema(description = "Profile image URL")
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public Long getId() {
-        return id;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
+public Resume(Long id, String name, String email, String phone, String address, String position) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.address = address;
+    this.position = position;
+}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+public Long getId() {
+    return id;
+}
 
-    public String getEmail() {
-        return email;
-    }
+public void setId(Long id) {
+    this.id = id;
+}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+public String getName() {
+    return name;
+}
 
-    public String getPhone() {
-        return phone;
-    }
+public void setName(String name) {
+    this.name = name;
+}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+public String getEmail() {
+    return email;
+}
 
-    public String getAddress() {
-        return address;
-    }
+public void setEmail(String email) {
+    this.email = email;
+}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+public String getPhone() {
+    return phone;
+}
 
-    public String getPosition() {
-        return position;
-    }
+public void setPhone(String phone) {
+    this.phone = phone;
+}
 
-    public void setPosition(String position) {
-        this.position = position;
-    }
+public String getAddress() {
+    return address;
+}
+
+public void setAddress(String address) {
+    this.address = address;
+}
+
+public String getPosition() {
+    return position;
+}
+
+public void setPosition(String position) {
+    this.position = position;
+}
 }

@@ -16,6 +16,14 @@ import { Component, OnInit } from '@angular/core';
           </div>
 
           <form (ngSubmit)="saveResume()" #resumeForm="ngForm">
+            <div class="image-upload">
+              <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview" alt="Preview">
+              <input
+                type="file"
+                (change)="onImageSelected($event)"
+                accept="image/*">
+            </div>
+
             <input [(ngModel)]="currentResume.name" name="name" placeholder="Name" required>
             <input [(ngModel)]="currentResume.email" name="email" placeholder="Email" required>
             <input [(ngModel)]="currentResume.phone" name="phone" placeholder="Phone">
@@ -36,6 +44,13 @@ import { Component, OnInit } from '@angular/core';
 
           <div class="results">
             <div *ngFor="let resume of resumes" class="resume-card">
+              <div class="image-avatar">
+                <img *ngIf="resume.imageUrl"
+                     [src]="'http://localhost:8080' + resume.imageUrl"
+                     [alt]="resume.name"
+                     (error)="handleImageError($event)">
+                <span *ngIf="!resume.imageUrl">{{resume.name[0]}}</span>
+              </div>
               <h3>{{resume.name}}</h3>
               <p>{{resume.email}}</p>
               <p>{{resume.position}}</p>
@@ -44,7 +59,7 @@ import { Component, OnInit } from '@angular/core';
                 <button (click)="deleteResume(resume.id!)" [disabled]="isLoading">Delete</button>
               </div>
             </div>
-          </div>
+            </div>
         </div>
       `,
       styleUrls: ['./resume-crud.component.css']
@@ -55,8 +70,10 @@ import { Component, OnInit } from '@angular/core';
       isEditing = false;
       isLoading = false;
       error: string | null = null;
+      imagePreview: string | undefined;
 
-      constructor(private resumeService: ResumeService) { }
+      constructor(private resumeService: ResumeService) {
+      }
 
       ngOnInit(): void {
         this.loadResumes();
@@ -75,28 +92,36 @@ import { Component, OnInit } from '@angular/core';
         }
       }
 
-      async saveResume(): Promise<void> {
-        try {
-          this.isLoading = true;
-          this.error = null;
+     async saveResume(): Promise<void> {
+         try {
+             this.isLoading = true;
+             this.error = null;
 
-          if (this.isEditing) {
-            await this.resumeService.updateResume(this.currentResume.id!, this.currentResume);
-          } else {
-            await this.resumeService.createResume(this.currentResume);
-          }
-          this.resetForm();
-          await this.loadResumes();
-        } catch (e) {
-          this.error = 'Error saving resume';
-          console.error(e);
-        } finally {
-          this.isLoading = false;
-        }
-      }
+             // Ensure imageUrl is included in the resume object
+             if (this.currentResume.imageUrl) {
+                 this.currentResume = {
+                     ...this.currentResume,
+                     imageUrl: this.currentResume.imageUrl
+                 };
+             }
+
+             if (this.isEditing) {
+                 await this.resumeService.updateResume(this.currentResume.id!, this.currentResume);
+             } else {
+                 await this.resumeService.createResume(this.currentResume);
+             }
+             this.resetForm();
+             await this.loadResumes();
+         } catch (e) {
+             this.error = 'Error saving resume';
+             console.error(e);
+         } finally {
+             this.isLoading = false;
+         }
+     }
 
       editResume(resume: Resume): void {
-        this.currentResume = { ...resume };
+        this.currentResume = {...resume};
         this.isEditing = true;
       }
 
@@ -119,4 +144,42 @@ import { Component, OnInit } from '@angular/core';
         this.isEditing = false;
         this.error = null;
       }
+
+async onImageSelected(event: Event): Promise<void> {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (!file) return;
+
+  // Create preview
+  const reader = new FileReader();
+  reader.onload = () => {
+    this.imagePreview = reader.result as string;
+  };
+  reader.readAsDataURL(file);
+
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch(`${this.resumeService.url}/upload`, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) throw new Error('Upload failed');
+
+    const result = await response.json();
+    // Update the current resume with the image URL
+    this.currentResume = {
+      ...this.currentResume,
+      imageUrl: result.imageUrl
+    };
+  } catch (e) {
+    this.error = 'Error uploading image';
+    console.error(e);
+  }
+}
+handleImageError(event: any): void {
+  event.target.style.display = 'none';
+  event.target.parentElement.querySelector('span').style.display = 'flex';
+}
     }
