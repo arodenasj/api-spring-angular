@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface ResumeService {
     List<Resume> getAllResumes();
+
     Optional<Resume> getResumeById(Long id);
+
     Resume saveResume(Resume resume);
+
     void deleteResume(Long id);
 }

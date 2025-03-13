@@ -35,12 +35,20 @@ public class Resume {
 
     @Schema(description = "Current or desired position", example = "Developer")
     private String position;
+    @Schema(description = "Profile image URL")
+    private String imageUrl;
 
     public Resume() {
     }
 
-    @Schema(description = "Profile image URL")
-    private String imageUrl;
+    public Resume(Long id, String name, String email, String phone, String address, String position) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.position = position;
+    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -50,61 +58,51 @@ public class Resume {
         this.imageUrl = imageUrl;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-public Resume(Long id, String name, String email, String phone, String address, String position) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.phone = phone;
-    this.address = address;
-    this.position = position;
-}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-public Long getId() {
-    return id;
-}
+    public String getName() {
+        return name;
+    }
 
-public void setId(Long id) {
-    this.id = id;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public String getName() {
-    return name;
-}
+    public String getEmail() {
+        return email;
+    }
 
-public void setName(String name) {
-    this.name = name;
-}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-public String getEmail() {
-    return email;
-}
+    public String getPhone() {
+        return phone;
+    }
 
-public void setEmail(String email) {
-    this.email = email;
-}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-public String getPhone() {
-    return phone;
-}
+    public String getAddress() {
+        return address;
+    }
 
-public void setPhone(String phone) {
-    this.phone = phone;
-}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-public String getAddress() {
-    return address;
-}
+    public String getPosition() {
+        return position;
+    }
 
-public void setAddress(String address) {
-    this.address = address;
-}
-
-public String getPosition() {
-    return position;
-}
-
-public void setPosition(String position) {
-    this.position = position;
-}
+    public void setPosition(String position) {
+        this.position = position;
+    }
 }

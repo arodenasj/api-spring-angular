@@ -1,6 +1,5 @@
 package es.insinno;
 
-import es.insinno.TestConfig;
 import es.insinno.controller.ResumeController;
 import es.insinno.entity.Resume;
 import es.insinno.services.ResumeService;
@@ -18,7 +17,8 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ResumeController.class)
 @Import(TestConfig.class)
@@ -70,8 +70,8 @@ class ResumeControllerTest {
         when(resumeService.saveResume(any(Resume.class))).thenReturn(resume1);
 
         mockMvc.perform(post("/api/resumes")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"phone\": \"1234567890\", \"address\": \"123 Main St\", \"position\": \"Developer\"}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"phone\": \"1234567890\", \"address\": \"123 Main St\", \"position\": \"Developer\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John Doe"));
 
