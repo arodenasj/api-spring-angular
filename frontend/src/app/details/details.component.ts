@@ -15,20 +15,20 @@ import {NgIf} from '@angular/common';
              [src]="getImageUrl(resume?.imageUrl)"
              [alt]="resume?.name || ''"
              (error)="handleImageError($event)">
-        <span *ngIf="!resume?.imageUrl">{{getFirstCharacter()}}</span>
+        <span *ngIf="!resume?.imageUrl">{{ getFirstCharacter() }}</span>
       </div>
 
-      <h2>{{resume?.name}}</h2>
+      <h2>{{ resume?.name }}</h2>
 
       <div class="resume-description">
-        <p><strong>Position:</strong> {{resume?.position}}</p>
+        <p><strong>Position:</strong> {{ resume?.position }}</p>
       </div>
 
       <div class="resume-details">
         <ul>
-          <li><strong>Email:</strong> {{resume?.email}}</li>
-          <li><strong>Phone:</strong> {{resume?.phone}}</li>
-          <li><strong>Address:</strong> {{resume?.address}}</li>
+          <li><strong>Email:</strong> {{ resume?.email }}</li>
+          <li><strong>Phone:</strong> {{ resume?.phone }}</li>
+          <li><strong>Address:</strong> {{ resume?.address }}</li>
         </ul>
       </div>
     </article>
@@ -40,6 +40,14 @@ export class DetailsComponent {
   resumeService = inject(ResumeService);
   resume: Resume | undefined;
 
+  constructor() {
+    const resumeId = Number(this.route.snapshot.params["id"]);
+    this.resumeService.getResumeById(resumeId).then(resume => {
+        this.resume = resume;
+      }
+    );
+  }
+
   getFirstCharacter(): string {
     return this.resume?.name?.charAt(0) || "";
   }
@@ -48,16 +56,9 @@ export class DetailsComponent {
     if (!url) return '';
     return `http://localhost:8080${url}`;
   }
+
   handleImageError(event: any): void {
     event.target.style.display = 'none';
     event.target.parentElement.querySelector('span').style.display = 'flex';
-  }
-
-  constructor() {
-    const resumeId = Number(this.route.snapshot.params["id"]);
-    this.resumeService.getResumeById(resumeId).then(resume => {
-        this.resume = resume;
-      }
-    );
   }
 }
