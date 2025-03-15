@@ -5,7 +5,7 @@ import {Resume} from "../resume";
   providedIn: 'root'
 })
 export class ResumeService {
-  url = 'https://backend-api-resumes-2445025c121e.herokuapp.com/';
+  url = 'https://backend-api-resumes-2445025c121e.herokuapp.com/api/resumes';
 
   constructor() {
   }
