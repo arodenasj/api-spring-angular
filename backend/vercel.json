@@ -3,11 +3,13 @@
   "builds": [
     {
       "src": "backend/Dockerfile",
-      "use": "@vercel/docker"
+      "use": "@vercel/static-build"
     }
   ],
-  "env": {
-    "JAVA_HOME": "/usr/lib/jvm/java-11-openjdk",
-    "PATH": "$JAVA_HOME/bin:$PATH:/usr/share/maven/bin"
-  }
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/backend/Dockerfile"
+    }
+  ]
 }
