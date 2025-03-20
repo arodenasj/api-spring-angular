@@ -1,4 +1,3 @@
-// package.json
 {
   "scripts": {
     "build": "mvn clean package"
