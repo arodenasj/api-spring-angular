@@ -1,9 +1,18 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "backend/pom.xml",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "target"
+      }
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/backend/Dockerfile"
+      "dest": "backend/target/api-spring-angular-0.0.1-SNAPSHOT.jar"
     }
   ]
 }
